@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finaliser votre inscription · ExoTradingPlus!</title>
+  <meta name="description" content="Choisissez votre offre Early Bird ExoTradingPlus! et finalisez votre inscription. Paiement sécurisé par Stripe, accès Discord et Dashboard FINAI." />
+  <meta name="robots" content="noindex" />
+  <meta property="og:title" content="Finaliser votre inscription · ExoTradingPlus!" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/etp.css" />
+  <link rel="icon" href="LogoMarkETP.png" type="image/png">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img"></a>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="salle-des-marches.html">Salle des marchés</a>
+        <a href="performances.html">Track record</a>
+        <a href="offres.html">Offres</a>
+        <a href="histoire.html">Notre Histoire</a>
+        <a href="contact.html">Nous contacter</a>
+        <a href="compte.html">Mon compte</a>
+      </nav>
+      <div class="nav-right">
+        <a href="offres.html#pricing" class="btn btn-primary nav-cta">Voir les offres</a>
+        <button class="nav-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="padding-bottom:26px;">
+    <div class="wrap">
+      <span class="badge-phase"><span class="dot"></span>PHASE 1 · Tarif fondateur verrouillé</span>
+      <h1>Finaliser votre <span class="grad">inscription</span></h1>
+      <p class="hero-sub">Dernière étape. Vérifiez votre offre, ajustez-la si besoin, puis passez au paiement sécurisé. Vous rejoignez ExoTradingPlus! dans la foulée.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHECKOUT ============ -->
+  <section class="checkout-main">
+    <div class="wrap">
+      <div class="co-grid">
+
+        <!-- LEFT : choix de l'offre + récap -->
+        <div>
+          <div class="co-col-title">1 · Votre offre</div>
+          <div class="co-select" id="coSelect">
+            <button type="button" class="co-opt" data-offre="classique">
+              <span class="co-radio"></span>
+              <span class="co-opt-body">
+                <span class="co-opt-name">📌 EB Classique</span>
+                <span class="co-opt-sub">Mensuel · sans engagement long</span>
+              </span>
+              <span class="co-opt-price">40€<span> /mois</span></span>
+            </button>
+            <button type="button" class="co-opt" data-offre="vip">
+              <span class="co-radio"></span>
+              <span class="co-opt-body">
+                <span class="co-opt-name">⭐ EB VIP</span>
+                <span class="co-opt-sub">Engagement 6 mois · meilleur compromis</span>
+              </span>
+              <span class="co-opt-price">35€<span> /mois</span></span>
+            </button>
+            <button type="button" class="co-opt gold" data-offre="vipplus">
+              <span class="co-radio"></span>
+              <span class="co-opt-body">
+                <span class="co-opt-name">👑 EB VIP+</span>
+                <span class="co-opt-sub">Engagement 12 mois · prix garanti à vie</span>
+              </span>
+              <span class="co-opt-price">30€<span> /mois</span></span>
+            </button>
+          </div>
+
+          <div class="co-recap">
+            <h3 id="coRecapTitle">Ce qui est inclus</h3>
+            <ul id="coRecapList"></ul>
+          </div>
+        </div>
+
+        <!-- RIGHT : résumé + paiement -->
+        <aside class="co-sum" id="coSum">
+          <div class="co-sum-badge" id="coSumBadge">Votre sélection</div>
+          <div class="co-sum-name" id="coSumName">EB VIP</div>
+          <div class="co-sum-price" id="coSumPrice">35€<span> /mois</span></div>
+          <div class="co-sum-engage" id="coSumEngage">Engagement 6 mois</div>
+          <div class="co-sum-total" id="coSumTotal">210€ au total (35€ × 6)</div>
+          <span class="co-sum-discount" id="coSumDiscount">-68% vs prix public</span>
+          <!-- REMPLACER href par le vrai Stripe Payment Link de l'offre sélectionnée (data-stripe mis à jour par le JS) -->
+          <a href="#" id="coPayBtn" class="btn btn-primary btn-block btn-lg">Procéder au paiement sécurisé</a>
+          <div class="co-sum-secure"><i data-lucide="lock"></i><span>Paiement traité et chiffré par Stripe</span></div>
+          <p class="co-sum-lock">Vous ne saisissez vos informations de carte que sur la page sécurisée de Stripe. Nous n'y avons jamais accès.</p>
+        </aside>
+
+      </div>
+
+      <!-- ============ CE QUI SE PASSE ENSUITE ============ -->
+      <div class="co-steps">
+        <div class="co-steps-head">Ce qui se passe après le paiement</div>
+        <div class="co-steps-grid">
+          <div class="co-step">
+            <span class="co-step-n">1</span>
+            <h4>Paiement sécurisé</h4>
+            <p>Vous réglez sur la page Stripe. Vos données bancaires vont uniquement à Stripe, jamais à nous. Cartes Visa, Mastercard et paiements courants acceptés.</p>
+          </div>
+          <div class="co-step">
+            <span class="co-step-n">2</span>
+            <h4>Accès Discord</h4>
+            <p>Sur la page de confirmation, vous cliquez sur "Connecter mon Discord". C'est tout : vous rejoignez le serveur ZiProject! et votre rôle Early Bird est attribué automatiquement, le salon privé ExoTradingPlus! s'ouvre à vous.</p>
+          </div>
+          <div class="co-step">
+            <span class="co-step-n">3</span>
+            <h4>Dashboard FINAI</h4>
+            <p>Vous vous connectez au dashboard en un clic avec votre compte Discord et accédez aux rapports FINAI, aux analyses hebdo et à la salle de marché. Accès actif tout de suite.</p>
+          </div>
+        </div>
+        <p class="co-sum-lock" style="margin:22px auto 0;max-width:720px;">Vous n'avez ni mot de passe à créer ni identifiant Discord à fournir : votre compte Discord est votre clé, et le rattachement se fait sur votre numéro de commande, pas sur votre email. Si vous fermez la page de confirmation trop tôt, le bouton de connexion vous est renvoyé par email, et la commande <strong>/activer</strong> sur le serveur reste disponible à tout moment.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img logo-img-footer"></div>
+          <p style="max-width:320px;">L'exosquelette dopé à l'IA qui augmente l'investisseur dans sa performance. Adossé à la communauté ZiProject! et à la méthode CryptosSwing depuis 2018.</p>
+        </div>
+        <div>
+          <h4>Navigation</h4>
+          <a href="index.html">Accueil</a>
+          <a href="salle-des-marches.html">Salle des marchés</a>
+          <a href="performances.html">Track record</a>
+          <a href="offres.html">Offres Early Birds</a>
+          <a href="histoire.html">Notre Histoire</a>
+          <a href="contact.html">Nous contacter</a>
+        </div>
+        <div>
+          <h4>Communauté</h4>
+          <a href="https://discord.com/invite/za25Zpjvtn">Discord ZiProject!</a>
+          <a href="https://www.tiktok.com/@cryptosSwing">TikTok CryptosSwing</a>
+          <a href="https://www.youtube.com/@OptimizIA_xyz">YouTube (démarrage en cours)</a>
+        </div>
+        <div>
+          <h4>Contact &amp; Informations</h4>
+          <a href="mailto:contact@exotradingplus.com">contact@exotradingplus.com</a>
+          <a href="https://www.linkedin.com/in/remyginoux" target="_blank" rel="noopener">LinkedIn Rémy Ginoux</a>
+          <a href="https://www.linkedin.com/in/romainben" target="_blank" rel="noopener">LinkedIn Romain Ben</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="cgv.html">CGV</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+      <div class="footer-optimizia">
+        <div class="fo-text">
+          <span class="fo-badge">Une réalisation OptimizIA.xyz</span>
+          <strong>ExoTradingPlus!, une réalisation by OptimizIA.xyz</strong>
+          <p>L'agence qui intègre l'IA et l'automatisation dans les TPE/PME pour libérer du temps productif : agents sur-mesure, workflows n8n, sites et outils métier.</p>
+        </div>
+        <a href="https://www.optimizia.xyz" class="fo-cta" target="_blank" rel="noopener">Découvrir OptimizIA.xyz</a>
+      </div>
+      <div class="footer-disclaimer">
+        <p><strong>Disclaimer :</strong> Le site exotradingplus.com s'adresse à une audience internationale. Les contenus, formations et services proposés sur ExoTradingPlus! ont une vocation strictement éducative et informative. Ils ne constituent en aucun cas des recommandations de réaliser des transactions et ne peuvent être considérés comme une incitation à acheter ou à vendre des instruments financiers. Le trading d'instruments financiers comporte un niveau de risque élevé et peut ne pas convenir à tout le monde. Informez-vous pleinement des risques liés aux marchés et n'investissez que des montants que vous pouvez vous permettre de perdre. ExoTradingPlus! ne garantit ni les résultats ni la performance des produits fondés sur les informations présentes sur son site et ses serveurs. En conséquence, ExoTradingPlus! et sa société éditrice déclinent toute responsabilité quant à l'usage qui pourrait être fait de ces informations et aux conséquences qui pourraient en découler. Pour un conseil adapté à votre situation, adressez-vous à un professionnel. Nous pourrons prochainement vous mettre en relation avec des conseillers en gestion de patrimoine présents dans notre communauté d'investisseurs.</p>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ExoTradingPlus! · Développé par <a href="https://www.optimizia.xyz">OptimizIA.xyz</a> · Tous droits réservés</span>
+        <div class="footer-social">
+          <a href="https://discord.com/invite/za25Zpjvtn" aria-label="Discord"><svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.011c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/></svg></a>
+          <a href="https://www.youtube.com/@OptimizIA_xyz" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+          <a href="https://www.tiktok.com/@cryptosSwing" aria-label="TikTok"><svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="assets/etp.js"></script>
+  <script>
+  (function () {
+    // Offres : source de vérité alignée sur offres.html (Phase 1).
+    // stripe = Payment Links Stripe TEST (sandbox). À remplacer par les liens LIVE au passage en prod (Plan-Passage-LIVE-Stripe-Phase2).
+    var OFFERS = {
+      classique: {
+        badge: 'Souscription mensuelle', name: '📌 EB Classique',
+        price: '40€', engage: 'Souscription mensuelle, sans engagement long',
+        total: '40€ facturés chaque mois', discount: '-60% vs prix public',
+        gold: false, btnClass: 'btn-primary', stripe: 'https://buy.stripe.com/test_5kQ5kv9v11Tcakh5lW5J605',
+        features: [
+          'Accès au Discord privé ExoTradingPlus!',
+          'Dashboard FINAI & analyses hebdomadaires',
+          'Forum & salle de marché privée',
+          'Coaching collectif hebdomadaire (1h/semaine)',
+          'Accès à toutes les briques futures dès leur livraison'
+        ]
+      },
+      vip: {
+        badge: '★ Meilleur compromis', name: '⭐ EB VIP',
+        price: '35€', engage: 'Engagement 6 mois',
+        total: '210€ au total (35€ × 6)', discount: '-68% vs prix public',
+        gold: false, btnClass: 'btn-primary', stripe: 'https://buy.stripe.com/test_dRm8wH22zapI6417u45J604',
+        features: [
+          'Tout EB Classique inclus',
+          'Badge VIP Discord ZiProject!',
+          '4 analyses ON DEMAND par mois',
+          'Coaching individuel 1x/mois en visio (20 min)',
+          'Code promo -30% à vie sur le tarif public à la fin des Early Birds (souscription Phase 1)',
+          'Parrainage : +1 mois offert par filleul EB',
+          'Accès à toutes les briques futures dès leur livraison'
+        ]
+      },
+      vipplus: {
+        badge: '👑 Meilleur deal absolu', name: '👑 EB VIP+',
+        price: '30€', engage: 'Engagement 12 mois, prix garanti à vie',
+        total: '360€ au total (30€ × 12)', discount: '-77% vs prix public',
+        gold: true, btnClass: 'btn-gold', stripe: 'https://buy.stripe.com/test_3cIbITbD9cxQ3VTeWw5J603',
+        features: [
+          'Tout EB VIP inclus',
+          'Badge VIP+ Discord ZiProject!',
+          '10 analyses ON DEMAND par mois',
+          'Coaching individuel toutes les 2 semaines en visio (20 min)',
+          'Prix garanti à vie, aucune augmentation possible',
+          'Parrainage VIP+ : +3 mois pour vous, +1 mois et +10 analyses par filleul VIP+',
+          'Accès à toutes les briques futures dès leur livraison'
+        ]
+      }
+    };
+    var ORDER = ['classique', 'vip', 'vipplus'];
+
+    // Code parrain : lu dans l'URL, puis garde en session le temps du tunnel.
+    // Sans ce relais, un aller-retour vers offres.html ferait perdre le parrainage.
+    var PARRAIN = (function () {
+      var p = new URLSearchParams(window.location.search).get('parrain') || '';
+      p = p.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+      try {
+        if (p) sessionStorage.setItem('etp_parrain', p);
+        else p = sessionStorage.getItem('etp_parrain') || '';
+      } catch (e) {}
+      return p;
+    })();
+
+    var sel = document.getElementById('coSelect');
+    var recapTitle = document.getElementById('coRecapTitle');
+    var recapList = document.getElementById('coRecapList');
+    var sum = document.getElementById('coSum');
+    var sumBadge = document.getElementById('coSumBadge');
+    var sumName = document.getElementById('coSumName');
+    var sumPrice = document.getElementById('coSumPrice');
+    var sumEngage = document.getElementById('coSumEngage');
+    var sumTotal = document.getElementById('coSumTotal');
+    var sumDiscount = document.getElementById('coSumDiscount');
+    var payBtn = document.getElementById('coPayBtn');
+
+    function render(key) {
+      var o = OFFERS[key];
+      if (!o) return;
+
+      // état sélecteur
+      sel.querySelectorAll('.co-opt').forEach(function (b) {
+        b.classList.toggle('selected', b.getAttribute('data-offre') === key);
+      });
+
+      // récap features
+      recapList.innerHTML = o.features.map(function (f) {
+        return '<li><i data-lucide="check"></i><span>' + f + '</span></li>';
+      }).join('');
+
+      // panneau résumé
+      sum.classList.toggle('gold', o.gold);
+      sumBadge.textContent = o.badge;
+      sumName.textContent = o.name;
+      sumPrice.innerHTML = o.price + '<span> /mois</span>';
+      sumEngage.textContent = o.engage;
+      sumTotal.textContent = o.total;
+      sumDiscount.textContent = o.discount;
+
+      // bouton paiement (Stripe). Le code parrain voyage en client_reference_id :
+      // Stripe le renvoie tel quel dans checkout.session.completed, ce qui evite
+      // de demander au filleul de ressaisir quoi que ce soit.
+      var lien = o.stripe;
+      if (PARRAIN) lien += '?client_reference_id=' + encodeURIComponent(PARRAIN);
+      payBtn.className = 'btn ' + o.btnClass + ' btn-block btn-lg';
+      payBtn.setAttribute('href', lien);
+      payBtn.setAttribute('data-stripe', lien);
+
+      // URL synchronisée (partage / retour), sans perdre le parrainage
+      try {
+        history.replaceState(null, '', '?offre=' + key + (PARRAIN ? '&parrain=' + encodeURIComponent(PARRAIN) : ''));
+      } catch (e) {}
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    // clic sur une offre
+    sel.querySelectorAll('.co-opt').forEach(function (b) {
+      b.addEventListener('click', function () { render(b.getAttribute('data-offre')); });
+    });
+
+    // offre initiale depuis ?offre= (défaut : vip)
+    var params = new URLSearchParams(window.location.search);
+    var start = params.get('offre');
+    if (ORDER.indexOf(start) === -1) start = 'vip';
+    render(start);
+  })();
+  </script>
+<script src="assets/oia-tracker.js" defer></script>
+</body>
+</html>

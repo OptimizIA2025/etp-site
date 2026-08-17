@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon compte · ExoTradingPlus!</title>
+  <meta name="description" content="Votre espace ExoTradingPlus! : état de votre abonnement, analyses ON DEMAND, parrainage et gestion de votre facturation." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/etp.css" />
+  <link rel="icon" href="LogoMarkETP.png" type="image/png">
+  <style>
+    /* Espace client. Reprend les jetons du design system, rien de nouveau
+       cote couleurs ou rayons : uniquement la mise en page propre a la page. */
+    .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+    .acc-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 24px}
+    .acc-card.wide{grid-column:1 / -1}
+    .acc-card h3{font-family:var(--font-head);font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+    .acc-card h3 .lucide{width:17px;height:17px;color:var(--emerald-2)}
+    .acc-card .acc-hint{color:var(--muted);font-size:13px;margin:0 0 18px}
+
+    .acc-line{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+    .acc-line:last-of-type{border-bottom:0}
+    .acc-line dt{color:var(--muted);font-size:14px}
+    .acc-line dd{margin:0;font-weight:600;font-size:15px;text-align:right}
+    .acc-line dd .sub{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:2px}
+
+    .acc-state{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.02em;
+      padding:5px 12px;border-radius:999px;text-transform:uppercase}
+    .acc-state .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+    .st-active{color:var(--emerald-2);background:rgba(52,211,153,.12);border:1px solid var(--emerald-line)}
+    .st-warn{color:var(--amber);background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35)}
+    .st-off{color:var(--short-2);background:rgba(246,70,93,.12);border:1px solid var(--short-line)}
+
+    .acc-alert{display:flex;gap:13px;align-items:flex-start;padding:16px 18px;border-radius:var(--radius);
+      margin-top:18px;font-size:14px;line-height:1.55}
+    .acc-alert .lucide{width:19px;height:19px;flex:none;margin-top:1px}
+    .acc-alert.warn{background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.32);color:var(--text-2)}
+    .acc-alert.warn .lucide{color:var(--amber)}
+    .acc-alert.info{background:var(--glass);border:1px solid var(--line);color:var(--text-2)}
+    .acc-alert.info .lucide{color:var(--cyan-2)}
+    .acc-alert strong{color:var(--text)}
+
+    .acc-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:20px}
+
+    /* Jauge ON DEMAND */
+    .quota-num{font-family:var(--font-head);font-size:38px;font-weight:800;line-height:1;letter-spacing:-.02em}
+    .quota-num span{font-size:17px;font-weight:600;color:var(--muted)}
+    .quota-track{height:9px;border-radius:999px;background:var(--bg-4);overflow:hidden;margin:16px 0 9px;border:1px solid var(--line)}
+    /* Remplissage anime en transform et non en width : la largeur declenche un
+       recalcul de mise en page a chaque image, scaleX reste sur le compositeur.
+       Le rayon est porte par la piste (overflow hidden), donc rien a arrondir ici. */
+    .quota-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--emerald),var(--cyan));
+      transform:scaleX(0);transform-origin:left center;transition:transform .4s ease}
+    .quota-foot{color:var(--muted);font-size:12.5px}
+
+    /* Parrainage */
+    .ref-code{display:flex;gap:10px;align-items:stretch;margin:4px 0 14px}
+    .ref-code input{flex:1;min-width:0;font-family:var(--mono);font-size:14px;letter-spacing:.06em;
+      background:var(--bg-4);border:1px solid var(--line-strong);color:var(--text);
+      border-radius:12px;padding:12px 14px}
+    .ref-code button{flex:none}
+    .ref-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}
+    .ref-table th{text-align:left;color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;
+      letter-spacing:.04em;padding:0 10px 10px 0;border-bottom:1px solid var(--line)}
+    .ref-table td{padding:12px 10px 12px 0;border-bottom:1px solid var(--line)}
+    .ref-table tr:last-child td{border-bottom:0}
+    .ref-gain{color:var(--emerald-2);font-weight:600;white-space:nowrap}
+    .ref-empty{color:var(--muted);font-size:14px;padding:18px 0 4px;line-height:1.6}
+
+    .acc-signout{background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer;
+      text-decoration:underline;padding:0;font-family:inherit}
+    .acc-signout:hover{color:var(--text-2)}
+
+    .acc-gate{max-width:520px;margin:0 auto;text-align:center;background:var(--bg-2);
+      border:1px solid var(--line);border-radius:var(--radius-lg);padding:44px 34px}
+    .acc-gate h2{font-family:var(--font-head);font-size:24px;margin:0 0 10px}
+    .acc-gate p{color:var(--text-2);font-size:15px;line-height:1.65;margin:0 0 22px}
+
+    .acc-skel{color:var(--muted);text-align:center;padding:60px 0;font-size:15px}
+
+    @media (max-width:880px){
+      .acc-grid{grid-template-columns:1fr}
+      .acc-line{flex-direction:column;align-items:flex-start;gap:3px}
+      .acc-line dd{text-align:left}
+      .ref-table thead{display:none}
+      .ref-table tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+      .ref-table td{display:flex;justify-content:space-between;border:0;padding:4px 0}
+      .ref-table td::before{content:attr(data-lbl);color:var(--muted);font-size:12.5px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img"></a>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="salle-des-marches.html">Salle des marchés</a>
+        <a href="performances.html">Track record</a>
+        <a href="offres.html">Offres</a>
+        <a href="histoire.html">Notre Histoire</a>
+        <a href="contact.html">Nous contacter</a>
+        <a href="compte.html">Mon compte</a>
+      </nav>
+      <div class="nav-right">
+        <a href="https://ziproject-finai.vercel.app" class="btn btn-primary nav-cta" target="_blank" rel="noopener">Dashboard FINAI</a>
+        <button class="nav-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="padding-bottom:14px;">
+    <div class="wrap">
+      <span class="badge-phase"><span class="dot"></span>Espace abonné</span>
+      <h1>Mon <span class="grad">compte</span></h1>
+      <p class="hero-sub" id="accLead">Votre abonnement, vos analyses ON DEMAND, votre parrainage et la gestion de votre facturation, au même endroit.</p>
+    </div>
+  </section>
+
+  <section class="checkout-main" style="padding-top:8px;">
+    <div class="wrap">
+
+      <!-- Chargement -->
+      <div id="accLoading" class="acc-skel">Chargement de votre espace...</div>
+
+      <!-- Non connecté -->
+      <div id="accGate" class="acc-gate" hidden>
+        <h2>Connectez-vous</h2>
+        <p>Votre espace s'ouvre avec le compte Discord que vous utilisez sur ZiProject!. C'est le même bouton que pour le Dashboard FINAI, aucun mot de passe à retenir.</p>
+        <button id="btnLogin" class="btn btn-discord btn-lg btn-block">Continuer avec Discord</button>
+        <p style="margin:20px 0 0;font-size:13.5px;">Pas encore abonné ? <a href="offres.html" style="color:var(--emerald-2);text-decoration:underline;">Découvrir les offres Early Birds</a></p>
+      </div>
+
+      <!-- Connecté, sans abonnement retrouvé -->
+      <div id="accNoSub" class="acc-gate" hidden>
+        <h2>Aucun abonnement rattaché</h2>
+        <p id="accNoSubMsg">Vous êtes bien connecté, mais nous ne trouvons pas d'abonnement lié à ce compte. C'est presque toujours parce que l'adresse de votre compte Discord n'est pas celle utilisée lors du paiement.</p>
+        <p style="margin:16px 0 0;">Vous pouvez le rattacher vous-même en deux minutes, depuis le serveur Discord ZiProject! :</p>
+        <ol style="margin:12px 0 0;padding-left:20px;line-height:1.8;font-size:14.5px;">
+          <li>Tapez <strong>/activer email:</strong> suivi de l'adresse utilisée pour votre paiement.</li>
+          <li>Vous recevez un code à 6 chiffres sur cette adresse, valable 15 minutes.</li>
+          <li>Tapez <strong>/activer code:</strong> suivi de ce code. Votre rôle est posé et votre abonnement apparaît ici.</li>
+        </ol>
+        <p class="acc-hint" style="margin:12px 0 0;">Le code prouve que la boîte mail est bien la vôtre. C'est pour cette raison qu'une simple adresse ne suffit jamais à ouvrir un accès.</p>
+        <div class="acc-actions" style="margin-top:18px;">
+          <a href="https://discord.com/invite/za25Zpjvtn" class="btn btn-discord" target="_blank" rel="noopener">Ouvrir le Discord ZiProject!</a>
+          <a href="mailto:contact@exotradingplus.com?subject=Rattachement%20de%20mon%20abonnement" class="btn btn-ghost">Nous écrire</a>
+        </div>
+        <p style="margin:20px 0 0;font-size:13.5px;"><button class="acc-signout" id="btnSignout2">Se déconnecter</button></p>
+      </div>
+
+      <!-- Espace abonné -->
+      <div id="accMain" hidden>
+        <div id="accBanner"></div>
+
+        <div class="acc-grid">
+
+          <!-- Abonnement -->
+          <div class="acc-card">
+            <h3><i data-lucide="badge-check"></i>Mon abonnement</h3>
+            <p class="acc-hint">Ce que vous avez souscrit et jusqu'à quand.</p>
+            <dl>
+              <div class="acc-line"><dt>Formule</dt><dd id="fTier">-</dd></div>
+              <div class="acc-line"><dt>Statut</dt><dd id="fStatus">-</dd></div>
+              <div class="acc-line"><dt>Tarif</dt><dd id="fPrice">-</dd></div>
+              <div class="acc-line"><dt>Prochaine échéance</dt><dd id="fRenew">-</dd></div>
+              <div class="acc-line"><dt>Engagement</dt><dd id="fEngage">-</dd></div>
+            </dl>
+            <div class="acc-actions">
+              <button id="btnPortal" class="btn btn-primary">Gérer ma facturation</button>
+              <button id="btnUpgrade" class="btn btn-ghost">Changer de formule</button>
+            </div>
+            <div id="upgradePanel" hidden></div>
+            <p class="acc-hint" style="margin:14px 0 0;">Le portail sécurisé Stripe vous permet de changer de carte, mettre à jour vos coordonnées et récupérer vos factures. Le bouton « Annuler l'abonnement » du portail <strong>n'interrompt rien immédiatement</strong> : il arrête le renouvellement automatique et votre accès reste ouvert jusqu'à la date affichée ci-dessus. Vous pouvez revenir sur cette décision tant que cette date n'est pas passée.</p>
+          </div>
+
+          <!-- ON DEMAND -->
+          <div class="acc-card">
+            <h3><i data-lucide="zap"></i>Analyses ON DEMAND</h3>
+            <p class="acc-hint">Vos analyses à la demande pour le mois en cours.</p>
+            <div class="quota-num"><span id="qUsed">0</span> <span>/ <span id="qTotal">0</span> utilisées</span></div>
+            <div class="quota-track"><div class="quota-fill" id="qFill"></div></div>
+            <p class="quota-foot" id="qFoot">-</p>
+            <div class="acc-actions">
+              <a href="https://discord.com/channels/1333477611850043538" class="btn btn-ghost" target="_blank" rel="noopener">Demander une analyse</a>
+            </div>
+          </div>
+
+          <!-- Discord -->
+          <div class="acc-card">
+            <h3><i data-lucide="message-circle"></i>Accès Discord</h3>
+            <p class="acc-hint">Le salon privé, la salle de marché et votre rôle Early Bird.</p>
+            <dl>
+              <div class="acc-line"><dt>Compte lié</dt><dd id="fDiscord">-</dd></div>
+              <div class="acc-line"><dt>Rôle attribué</dt><dd id="fRole">-</dd></div>
+            </dl>
+            <div class="acc-actions" id="discordActions"></div>
+          </div>
+
+          <!-- Dashboard -->
+          <div class="acc-card">
+            <h3><i data-lucide="line-chart"></i>Dashboard FINAI</h3>
+            <p class="acc-hint">Vos rapports, analyses hebdomadaires et historique.</p>
+            <p style="color:var(--text-2);font-size:14.5px;line-height:1.65;margin:0;">Vous vous connectez au dashboard avec le même compte Discord. Votre formule y ouvre automatiquement les contenus auxquels vous avez droit.</p>
+            <div class="acc-actions">
+              <a href="https://ziproject-finai.vercel.app" class="btn btn-primary" target="_blank" rel="noopener">Ouvrir le Dashboard</a>
+            </div>
+          </div>
+
+          <!-- Parrainage -->
+          <div class="acc-card wide" id="cardRef">
+            <h3><i data-lucide="gift"></i>Mon parrainage</h3>
+            <p class="acc-hint">Partagez votre lien. Le mois offert vous est crédité au 2ᵉ prélèvement réussi de votre filleul, pas à son inscription : c'est ce qui garantit que le parrainage récompense un vrai abonné.</p>
+
+            <div class="ref-code">
+              <input id="refLink" type="text" readonly aria-label="Votre lien de parrainage">
+              <button id="btnCopy" class="btn btn-primary">Copier</button>
+            </div>
+            <p class="acc-hint" style="margin:0 0 20px;">Votre code : <strong id="refCode" style="color:var(--text);font-family:var(--mono);letter-spacing:.08em;">-</strong></p>
+
+            <div id="refList"></div>
+          </div>
+
+        </div>
+
+        <p style="text-align:center;margin:30px 0 0;">
+          <span style="color:var(--muted);font-size:13.5px;" id="accWho"></span>
+          <button class="acc-signout" id="btnSignout" style="margin-left:10px;">Se déconnecter</button>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img logo-img-footer"></div>
+          <p style="max-width:320px;">L'exosquelette dopé à l'IA qui augmente l'investisseur dans sa performance. Adossé à la communauté ZiProject! et à la méthode CryptosSwing depuis 2018.</p>
+        </div>
+        <div>
+          <h4>Navigation</h4>
+          <a href="index.html">Accueil</a>
+          <a href="salle-des-marches.html">Salle des marchés</a>
+          <a href="performances.html">Track record</a>
+          <a href="offres.html">Offres Early Birds</a>
+          <a href="histoire.html">Notre Histoire</a>
+          <a href="contact.html">Nous contacter</a>
+        </div>
+        <div>
+          <h4>Communauté</h4>
+          <a href="https://discord.com/invite/za25Zpjvtn">Discord ZiProject!</a>
+          <a href="https://www.tiktok.com/@cryptosSwing">TikTok CryptosSwing</a>
+          <a href="https://www.youtube.com/@OptimizIA_xyz">YouTube (démarrage en cours)</a>
+        </div>
+        <div>
+          <h4>Contact &amp; Informations</h4>
+          <a href="mailto:contact@exotradingplus.com">contact@exotradingplus.com</a>
+          <a href="https://www.linkedin.com/in/remyginoux" target="_blank" rel="noopener">LinkedIn Rémy Ginoux</a>
+          <a href="https://www.linkedin.com/in/romainben" target="_blank" rel="noopener">LinkedIn Romain Ben</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="cgv.html">CGV</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ExoTradingPlus! · Développé par <a href="https://www.optimizia.xyz">OptimizIA.xyz</a> · Tous droits réservés</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="assets/etp.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    // Cles publiques : concues pour etre exposees cote client. Ce qui protege
+    // les donnees ici, c'est la RLS Supabase (chacun ne lit que ses lignes),
+    // pas le secret de cette cle.
+    var SUPABASE_URL = 'https://vlxdsrqxnvdbqjevqntb.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_M9iftGQ2qKkhz2VV16z9zA_B1nyNetD';
+    var PORTAL_ENDPOINT = 'https://n8n.romainben.cloud/webhook/etp-portail';
+    var UPGRADE_ENDPOINT = 'https://n8n.romainben.cloud/webhook/etp-upgrade';
+    var DISCORD_CLIENT_ID = '1529847468307779734';
+    var DISCORD_REDIRECT = 'https://n8n.romainben.cloud/webhook/discord-connect';
+    var DISCORD_SERVEUR = 'https://discord.com/channels/1333477611850043538';
+
+    var TIERS = {
+      classique: { nom: 'EB Classique', prix: '40 € par mois',        cadence: 'chaque mois',      engage: 'Sans engagement long' },
+      vip:       { nom: 'EB VIP',       prix: '210 € tous les 6 mois', cadence: 'tous les 6 mois',  engage: 'Engagement 6 mois' },
+      vipplus:   { nom: 'EB VIP+',      prix: '360 € par an',          cadence: 'chaque année',     engage: 'Engagement 12 mois' }
+    };
+    var QUOTAS = { classique: 0, vip: 4, vipplus: 10 };
+
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    var $ = function (id) { return document.getElementById(id); };
+
+    function show(id) { var e = $(id); if (e) e.hidden = false; }
+    function hide(id) { var e = $(id); if (e) e.hidden = true; }
+    function icons() { if (window.lucide) window.lucide.createIcons(); }
+
+    function dateFr(iso) {
+      if (!iso) return null;
+      var d = new Date(iso);
+      if (isNaN(d)) return null;
+      return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function joursAvant(iso) {
+      if (!iso) return null;
+      var diff = new Date(iso) - new Date();
+      if (diff < 0) return -1;
+      return Math.ceil(diff / 86400000);
+    }
+
+    // ---- Rendu -------------------------------------------------------
+
+    function rendreAbonnement(sub) {
+      var t = TIERS[sub.tier] || { nom: sub.tier, prix: '-', cadence: '', engage: '-' };
+      $('fTier').textContent = t.nom;
+      $('fPrice').innerHTML = t.prix + (sub.price_locked
+        ? '<span class="sub">Prix garanti à vie, aucune augmentation possible</span>'
+        : '<span class="sub">Tarif Early Bird de la phase ' + (sub.phase || 'p1').toUpperCase() + '</span>');
+
+      var etats = {
+        active:   ['st-active', 'Actif'],
+        past_due: ['st-warn',   'Paiement en attente'],
+        trialing: ['st-active', 'Période d\'essai'],
+        canceled: ['st-off',    'Résilié']
+      };
+      var e = etats[sub.status] || ['st-off', sub.status];
+      $('fStatus').innerHTML = '<span class="acc-state ' + e[0] + '"><span class="dot"></span>' + e[1] + '</span>';
+
+      var fin = dateFr(sub.current_period_end);
+      var j = joursAvant(sub.current_period_end);
+      if (sub.status === 'canceled') {
+        $('fRenew').innerHTML = 'Aucune<span class="sub">Votre abonnement a pris fin</span>';
+      } else if (fin) {
+        var suite = j !== null && j >= 0
+          ? 'dans ' + j + ' jour' + (j > 1 ? 's' : '') +
+            (sub.cancel_at_period_end ? ', fin de votre accès' : ', renouvellement ' + t.cadence)
+          : 'échéance passée';
+        $('fRenew').innerHTML = fin + '<span class="sub">' + suite + '</span>';
+      } else {
+        $('fRenew').textContent = '-';
+      }
+
+      var mois = sub.engagement_months || 0;
+      $('fEngage').innerHTML = mois > 0
+        ? t.engage + '<span class="sub">Souscrit le ' + (dateFr(sub.created_at) || '-') + '</span>'
+        : t.engage + '<span class="sub">Résiliable à chaque échéance</span>';
+    }
+
+    function rendreBanniere(sub) {
+      var box = $('accBanner');
+      box.innerHTML = '';
+      if (sub.status === 'past_due') {
+        box.innerHTML = '<div class="acc-alert warn"><i data-lucide="alert-triangle"></i><div>' +
+          '<strong>Votre dernier paiement n\'est pas passé.</strong> Votre accès reste ouvert jusqu\'au ' +
+          (dateFr(sub.current_period_end) || 'terme de la période en cours') +
+          ', le temps que vous mettiez votre moyen de paiement à jour. Passez par « Gérer ma facturation » ci-dessous.' +
+          '</div></div>';
+      } else if (sub.status === 'canceled') {
+        box.innerHTML = '<div class="acc-alert warn"><i data-lucide="alert-triangle"></i><div>' +
+          '<strong>Votre abonnement est résilié.</strong> Vous pouvez reprendre quand vous voulez, ' +
+          'mais le tarif appliqué sera celui de la phase en cours au moment de la nouvelle souscription.' +
+          '</div></div>';
+      } else if (sub.cancel_at_period_end) {
+        // Stripe ne coupe rien au moment du clic : l'abonnement court jusqu'au
+        // terme deja regle. Sans ce bandeau, le client voit "Actif" jusqu'au
+        // dernier jour et n'a aucune trace de sa demande.
+        box.innerHTML = '<div class="acc-alert info"><i data-lucide="info"></i><div>' +
+          '<strong>Votre résiliation est enregistrée.</strong> Vous gardez l\'accès complet jusqu\'au ' +
+          (dateFr(sub.current_period_end) || 'terme de la période en cours') +
+          ', et vous ne serez plus prélevé ensuite. Vous pouvez revenir sur cette décision à tout moment ' +
+          'depuis « Gérer ma facturation ».' +
+          '</div></div>';
+      }
+    }
+
+    function rendreQuota(sub, used) {
+      var total = (QUOTAS[sub.tier] || 0) + (sub.bonus_ondemand || 0);
+      var u = used || 0;
+      $('qUsed').textContent = u;
+      $('qTotal').textContent = total;
+      var part = total > 0 ? Math.min(1, u / total) : 0;
+      $('qFill').style.transform = 'scaleX(' + part.toFixed(3) + ')';
+
+      if (total === 0) {
+        $('qFoot').textContent = 'La formule Classique n\'inclut pas d\'analyse ON DEMAND. Les formules VIP et VIP+ en ouvrent 4 et 10 par mois.';
+      } else {
+        var reste = Math.max(0, total - u);
+        var bonus = sub.bonus_ondemand ? ' (dont ' + sub.bonus_ondemand + ' offertes par parrainage)' : '';
+        $('qFoot').textContent = reste + ' analyse' + (reste > 1 ? 's' : '') + ' restante' + (reste > 1 ? 's' : '') +
+          ' ce mois-ci' + bonus + '. Le compteur repart au 1er du mois.';
+      }
+    }
+
+    function rendreDiscord(sub) {
+      var lie = !!sub.discord_id;
+      $('fDiscord').innerHTML = lie
+        ? '<span class="acc-state st-active"><span class="dot"></span>Connecté</span>' +
+          (sub.discord_username ? '<span class="sub">' + sub.discord_username + '</span>' : '')
+        : '<span class="acc-state st-warn"><span class="dot"></span>Non connecté</span>';
+
+      $('fRole').innerHTML = lie
+        ? (TIERS[sub.tier] ? TIERS[sub.tier].nom.replace('EB ', '') : sub.tier)
+        : '<span style="color:var(--muted);font-weight:400;">En attente de connexion</span>';
+
+      var actions = $('discordActions');
+      if (lie) {
+        // Lien direct vers le serveur, pas vers l'invitation : un membre deja
+        // present tomberait sinon sur l'ecran « rejoindre le serveur », qui donne
+        // l'impression que son acces n'est pas pose.
+        actions.innerHTML = '<a href="' + DISCORD_SERVEUR + '" class="btn btn-ghost" target="_blank" rel="noopener">Ouvrir le Discord</a>';
+      } else {
+        var url = 'https://discord.com/oauth2/authorize?client_id=' + DISCORD_CLIENT_ID +
+          '&response_type=code&redirect_uri=' + encodeURIComponent(DISCORD_REDIRECT) +
+          '&scope=' + encodeURIComponent('identify email guilds.join');
+        actions.innerHTML = '<a href="' + url + '" class="btn btn-discord">Connecter mon Discord</a>';
+      }
+    }
+
+    function rendreParrainage(sub, filleuls) {
+      if (sub.tier === 'classique') {
+        $('cardRef').innerHTML = '<h3><i data-lucide="gift"></i>Mon parrainage</h3>' +
+          '<p class="acc-hint">Le parrainage est inclus dans les formules VIP et VIP+.</p>' +
+          '<div class="acc-alert info"><i data-lucide="info"></i><div>En passant en VIP, chaque filleul vous offre un mois. ' +
+          'En VIP+, un filleul VIP+ vous rapporte 3 mois et 10 analyses ON DEMAND.</div></div>' +
+          '<div class="acc-actions"><a href="offres.html#pricing" class="btn btn-primary">Voir les formules</a></div>';
+        icons();
+        return;
+      }
+
+      var code = sub.referral_code || '';
+      var lien = 'https://exotradingplus.com/offres.html?parrain=' + encodeURIComponent(code);
+      $('refCode').textContent = code || '-';
+      $('refLink').value = lien;
+
+      var box = $('refList');
+      if (!filleuls || !filleuls.length) {
+        box.innerHTML = '<p class="ref-empty">Aucun filleul pour l\'instant. Partagez votre lien : ' +
+          'chaque personne qui souscrit avec vous rejoint la communauté et vous fait gagner du temps d\'abonnement.</p>';
+        return;
+      }
+
+      var LIB = {
+        pending:   ['En cours',  'st-warn'],
+        qualified: ['Acquis',    'st-active'],
+        credited:  ['Crédité',   'st-active'],
+        void:      ['Annulé',    'st-off']
+      };
+
+      var moisAcquis = 0, odAcquis = 0;
+      var lignes = filleuls.map(function (f) {
+        var l = LIB[f.status] || [f.status, 'st-off'];
+        if (f.status === 'qualified' || f.status === 'credited') {
+          moisAcquis += f.mois_offerts || 0;
+          odAcquis += f.ondemand_offerts || 0;
+        }
+        var gain = (f.mois_offerts || 0) + ' mois' + (f.ondemand_offerts ? ' + ' + f.ondemand_offerts + ' analyses' : '');
+        return '<tr>' +
+          '<td data-lbl="Filleul">' + f.referee_masque + '</td>' +
+          '<td data-lbl="Formule">' + ((TIERS[f.referee_tier] || {}).nom || '-') + '</td>' +
+          '<td data-lbl="Prélèvements">' + (f.paid_invoices || 0) + ' / 2</td>' +
+          '<td data-lbl="Statut"><span class="acc-state ' + l[1] + '"><span class="dot"></span>' + l[0] + '</span></td>' +
+          '<td data-lbl="Vous gagnez" class="ref-gain">' + gain + '</td>' +
+          '</tr>';
+      }).join('');
+
+      var total = moisAcquis > 0
+        ? '<div class="acc-alert info" style="margin-top:18px;"><i data-lucide="check-circle"></i><div>' +
+          '<strong>' + moisAcquis + ' mois offert' + (moisAcquis > 1 ? 's' : '') +
+          (odAcquis ? ' et ' + odAcquis + ' analyses ON DEMAND' : '') + ' acquis.</strong> ' +
+          'Les mois sont déduits automatiquement de vos prochaines factures.</div></div>'
+        : '';
+
+      box.innerHTML = '<table class="ref-table"><thead><tr>' +
+        '<th>Filleul</th><th>Formule</th><th>Prélèvements</th><th>Statut</th><th>Vous gagnez</th>' +
+        '</tr></thead><tbody>' + lignes + '</tbody></table>' + total;
+    }
+
+    // ---- Actions -----------------------------------------------------
+
+    async function ouvrirPortail() {
+      var btn = $('btnPortal');
+      var libelle = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Ouverture...';
+      try {
+        var s = await sb.auth.getSession();
+        var token = s.data.session && s.data.session.access_token;
+        var r = await fetch(PORTAL_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ access_token: token })
+        });
+        var d = await r.json();
+        if (d && d.ok && d.url) { window.location.href = d.url; return; }
+        alert(d && d.error === 'pas_de_client_stripe'
+          ? "Votre abonnement n'est pas encore relié à un dossier de facturation. Écrivez-nous à contact@exotradingplus.com, on le rattache."
+          : "Le portail de facturation est momentanément indisponible. Réessayez dans un instant ou écrivez-nous à contact@exotradingplus.com.");
+      } catch (e) {
+        alert("Le portail de facturation est momentanément indisponible. Réessayez dans un instant.");
+      }
+      btn.disabled = false;
+      btn.textContent = libelle;
+    }
+
+    // ---- Changement de formule -----------------------------------------
+
+    var ORDRE = ['classique', 'vip', 'vipplus'];
+    var upgradeBranche = false;
+
+    async function appelUpgrade(cible, confirmer) {
+      var s = await sb.auth.getSession();
+      var token = s.data.session && s.data.session.access_token;
+      var r = await fetch(UPGRADE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_token: token, cible: cible, confirmer: !!confirmer })
+      });
+      return await r.json();
+    }
+
+    function messageRefus(d) {
+      var LIB = {
+        non_authentifie: 'Votre session a expiré. Reconnectez-vous, puis réessayez.',
+        aucun_abonnement: "Aucun abonnement actif n'est rattaché à ce compte.",
+        pas_abonnement_stripe: "Votre abonnement n'est pas géré par Stripe. Écrivez-nous, on s'en occupe à la main.",
+        abonnement_inactif: "Votre abonnement doit être actif pour changer de formule. Régularisez d'abord votre paiement.",
+        pas_une_montee: "Une descente de gamme ne se fait pas en ligne pendant un engagement. Écrivez-nous, on regarde votre situation.",
+        phase_inconnue: "Votre tarif ne correspond à aucune grille en cours. Écrivez-nous, on rattache ça.",
+        formule_invalide: "Cette formule n'existe pas.",
+        paiement_refuse: 'Votre banque a refusé le paiement. Mettez votre carte à jour dans « Gérer ma facturation », puis réessayez.',
+        stripe_indisponible: 'Le service de facturation est momentanément indisponible. Réessayez dans un instant.'
+      };
+      var t = (d && LIB[d.error]) ||
+        "Le changement de formule n'a pas pu aboutir. Réessayez ou écrivez-nous à contact@exotradingplus.com.";
+      return '<div class="acc-alert warn"><i data-lucide="alert-triangle"></i><div>' + t + '</div></div>' +
+        '<div class="acc-actions"><button class="btn btn-ghost up-annuler">Retour</button></div>';
+    }
+
+    function rendreUpgrade(sub) {
+      var btn = $('btnUpgrade');
+      var panneau = $('upgradePanel');
+      var superieurs = ORDRE.slice(ORDRE.indexOf(sub.tier) + 1);
+      var ouvrable = superieurs.length && (sub.status === 'active' || sub.status === 'trialing');
+
+      if (!ouvrable) {
+        btn.hidden = true;
+        // Au palier le plus haut, retirer le bouton sans rien dire laisse croire a
+        // une panne. On enonce l'etat.
+        if (!superieurs.length) {
+          panneau.hidden = false;
+          panneau.innerHTML = '<div class="acc-alert info"><i data-lucide="info"></i><div>' +
+            'Vous êtes sur la formule la plus complète, il n\'y a pas de palier au-dessus. ' +
+            'Pour changer de formule à la fin de votre engagement, écrivez-nous à ' +
+            '<a href="mailto:contact@exotradingplus.com?subject=Changement%20de%20formule" ' +
+            'style="color:var(--emerald-2);text-decoration:underline;">contact@exotradingplus.com</a>.' +
+            '</div></div>';
+        } else {
+          panneau.hidden = true;
+        }
+        return;
+      }
+      btn.hidden = false;
+      panneau.innerHTML = '<div class="acc-alert info"><i data-lucide="info"></i><div>' +
+        'Une montée de gamme prend effet immédiatement. Le temps déjà payé sur votre formule ' +
+        'actuelle est déduit, vous ne réglez que la différence, et un nouvel engagement démarre ' +
+        'le jour du changement.</div></div>' +
+        '<div class="acc-actions">' + superieurs.map(function (t) {
+          return '<button class="btn btn-ghost up-choix" data-cible="' + t + '">Passer en ' +
+            TIERS[t].nom + ', ' + TIERS[t].prix + '</button>';
+        }).join('') + '</div>';
+    }
+
+    async function apercuUpgrade(cible) {
+      var p = $('upgradePanel');
+      p.innerHTML = '<p class="acc-hint" style="margin:0;">Calcul du montant en cours...</p>';
+      var d = await appelUpgrade(cible, false);
+      if (!d || !d.ok) { p.innerHTML = messageRefus(d); icons(); return; }
+
+      // Le montant exact vient de Stripe. S'il n'est pas disponible, on enonce la
+      // regle de prorata plutot que d'avancer un chiffre qu'on n'a pas calcule.
+      var montant = d.apercu_disponible
+        ? (d.montant_du_centimes / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
+        : null;
+
+      p.innerHTML = '<div class="acc-alert info"><i data-lucide="info"></i><div>' +
+        '<strong>Passage en ' + d.cible_libelle + '.</strong> ' +
+        (montant
+          ? 'Montant à régler aujourd\'hui : <strong>' + montant + '</strong>, le temps déjà payé sur votre formule ' +
+            d.tier_actuel_libelle + ' étant déduit.'
+          : 'Le temps déjà payé sur votre formule ' + d.tier_actuel_libelle +
+            ' est déduit du prix de la nouvelle, et Stripe prélève la différence immédiatement.') +
+        ' Un engagement de ' + d.engagement_cible + ' mois démarre aujourd\'hui.' +
+        '</div></div>' +
+        '<div class="acc-actions">' +
+        '<button class="btn btn-primary up-confirmer" data-cible="' + d.cible + '">Confirmer et payer</button>' +
+        '<button class="btn btn-ghost up-annuler">Annuler</button>' +
+        '</div>';
+      icons();
+    }
+
+    async function confirmerUpgrade(cible) {
+      var p = $('upgradePanel');
+      p.innerHTML = '<p class="acc-hint" style="margin:0;">Paiement en cours, ne fermez pas cette page...</p>';
+      var d = await appelUpgrade(cible, true);
+      if (!d || !d.ok) { p.innerHTML = messageRefus(d); icons(); return; }
+      if (d.warning === 'sync_differee') {
+        p.innerHTML = '<div class="acc-alert warn"><i data-lucide="alert-triangle"></i><div>' +
+          '<strong>Paiement accepté, passage en ' + d.cible_libelle + '.</strong> La synchronisation de ' +
+          'votre espace prend un peu plus de temps que prévu : votre rôle Discord et cette page se ' +
+          'mettront à jour sous peu. Si rien ne change d\'ici quelques heures, écrivez-nous.</div></div>';
+        icons();
+        return;
+      }
+      p.innerHTML = '<div class="acc-alert info"><i data-lucide="check-circle"></i><div>' +
+        '<strong>Vous êtes en ' + d.cible_libelle + '.</strong> Votre rôle Discord est mis à jour ' +
+        'et votre espace se recharge.</div></div>';
+      icons();
+      setTimeout(function () { window.location.reload(); }, 2400);
+    }
+
+    function brancherUpgrade(sub) {
+      if (upgradeBranche) return;
+      upgradeBranche = true;
+      $('btnUpgrade').addEventListener('click', function () {
+        var p = $('upgradePanel');
+        p.hidden = !p.hidden;
+        if (!p.hidden) icons();
+      });
+      $('upgradePanel').addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b) return;
+        if (b.classList.contains('up-choix')) apercuUpgrade(b.getAttribute('data-cible'));
+        else if (b.classList.contains('up-confirmer')) confirmerUpgrade(b.getAttribute('data-cible'));
+        else if (b.classList.contains('up-annuler')) { rendreUpgrade(sub); icons(); }
+      });
+    }
+
+    function copierLien() {
+      var champ = $('refLink');
+      champ.select();
+      champ.setSelectionRange(0, 99999);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      if (navigator.clipboard) { navigator.clipboard.writeText(champ.value).catch(function () {}); ok = true; }
+      var b = $('btnCopy');
+      b.textContent = ok ? 'Copié' : 'Copiez-le';
+      setTimeout(function () { b.textContent = 'Copier'; }, 2200);
+    }
+
+    // ---- Chargement --------------------------------------------------
+
+    async function charger() {
+      var s = await sb.auth.getSession();
+      var session = s.data.session;
+
+      if (!session) {
+        hide('accLoading');
+        show('accGate');
+        icons();
+        return;
+      }
+
+      var user = session.user;
+
+      var res = await sb.from('subscriptions')
+        .select('email,tier,status,phase,current_period_end,engagement_months,price_locked,discord_id,discord_username,referral_code,bonus_ondemand,cancel_at_period_end,created_at')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      var sub = res.data && res.data[0];
+      if (res.error || !sub) {
+        hide('accLoading');
+        show('accNoSub');
+        if (user && user.email) {
+          $('accNoSubMsg').textContent = 'Vous êtes connecté avec ' + user.email +
+            ", mais aucun abonnement n'est rattaché à ce compte. C'est presque toujours parce que l'adresse de votre compte Discord n'est pas celle utilisée lors du paiement.";
+        }
+        icons();
+        return;
+      }
+
+      // Consommation ON DEMAND du mois en cours.
+      var debutMois = new Date();
+      debutMois = debutMois.getFullYear() + '-' + String(debutMois.getMonth() + 1).padStart(2, '0') + '-01';
+      var usage = await sb.from('ondemand_usage').select('used').eq('period', debutMois).limit(1);
+      var used = usage.data && usage.data[0] ? usage.data[0].used : 0;
+
+      var fil = await sb.from('v_mes_filleuls')
+        .select('referee_masque,referee_tier,status,paid_invoices,mois_offerts,ondemand_offerts,created_at')
+        .order('created_at', { ascending: false });
+
+      rendreBanniere(sub);
+      rendreAbonnement(sub);
+      rendreQuota(sub, used);
+      rendreDiscord(sub);
+      rendreParrainage(sub, fil.data || []);
+      rendreUpgrade(sub);
+      brancherUpgrade(sub);
+
+      $('accWho').textContent = 'Connecté en tant que ' + (sub.email || (user && user.email) || '');
+      $('accLead').textContent = 'Bonjour. Voici l\'état de votre abonnement ' +
+        ((TIERS[sub.tier] || {}).nom || '') + ' et tout ce que vous pouvez piloter vous-même.';
+
+      hide('accLoading');
+      show('accMain');
+      icons();
+    }
+
+    // ---- Branchements ------------------------------------------------
+
+    // Supabase n'accepte comme adresse de retour que celles declarees dans sa
+    // liste blanche, et retombe sinon sur son URL par defaut, qui est le
+    // dashboard. Une page ouverte en double-clic est en file:// : elle n'a pas
+    // d'origine valide, donc on le dit ici au lieu de laisser l'utilisateur
+    // atterrir sur une autre application sans comprendre pourquoi.
+    if (window.location.protocol === 'file:') {
+      var bl = $('btnLogin');
+      bl.disabled = true;
+      bl.textContent = 'Connexion indisponible en fichier local';
+      var avert = document.createElement('p');
+      avert.className = 'acc-hint';
+      avert.style.cssText = 'margin:16px 0 0;text-align:left;';
+      avert.textContent = "Cette page est ouverte directement depuis le disque. La connexion Discord " +
+        "ne sait pas revenir sur une adresse file://. Servez le dossier sur http://localhost:5500 " +
+        "ou utilisez le site en ligne.";
+      bl.parentNode.insertBefore(avert, bl.nextSibling);
+    }
+
+    $('btnLogin').addEventListener('click', function () {
+      sb.auth.signInWithOAuth({
+        provider: 'discord',
+        options: { redirectTo: window.location.origin + window.location.pathname }
+      });
+    });
+
+    $('btnPortal').addEventListener('click', ouvrirPortail);
+    $('btnCopy').addEventListener('click', copierLien);
+
+    function deconnexion() {
+      sb.auth.signOut().then(function () { window.location.reload(); });
+    }
+    $('btnSignout').addEventListener('click', deconnexion);
+    $('btnSignout2').addEventListener('click', deconnexion);
+
+    // Le retour OAuth pose la session de maniere asynchrone : on recharge sur
+    // l'evenement plutot que de courir apres avec un delai.
+    sb.auth.onAuthStateChange(function (evt) {
+      if (evt === 'SIGNED_IN') {
+        hide('accGate'); hide('accNoSub'); show('accLoading');
+        charger();
+      }
+    });
+
+    charger();
+  })();
+  </script>
+<script src="assets/oia-tracker.js" defer></script>
+</body>
+</html>
