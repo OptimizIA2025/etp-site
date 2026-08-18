@@ -3,310 +3,484 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExoTradingPlus! · L'exosquelette IA de l'investisseur qui performe</title>
-  <meta name="description" content="Communauté d'investisseurs, salle des marchés et analyses institutionnelles dopées à l'IA. Méthode CryptosSwing depuis 2018. Offre Early Birds. EB VIP+ : prix garanti à vie." />
-  <meta property="og:title" content="ExoTradingPlus! · Early Birds Phase 1 ouverte" />
-  <meta property="og:description" content="Salle des marchés, communauté Discord et analyses FINAI dopées à l'IA. Méthode CryptosSwing éprouvée depuis 2018." />
+  <title>ExoTradingPlus! · Ouverture imminente</title>
+  <meta name="description" content="La salle des marchés ExoTradingPlus! ouvre bientôt. Communauté d'investisseurs, analyses FINAI dopées à l'IA, méthode CryptosSwing éprouvée depuis 2018." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="ExoTradingPlus! · Ouverture imminente" />
+  <meta property="og:description" content="Une salle des marchés, une communauté d'investisseurs sérieux et des analyses produites par notre outil FINAI. Ouverture imminente." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://exotradingplus.com/" />
+  <meta name="theme-color" content="#0b1220" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/etp.css" />
-  <link rel="icon" href="LogoMarkETP.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="LogoMarkETP.png" type="image/png" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --emerald: #10b981;
+      --emerald-2: #34d399;
+      --cyan-2: #22d3ee;
+      --text: #f1f5f9;
+      --text-2: #cbd5e1;
+      --muted: #94a3b8;
+      --dim: #64748b;
+      --line: rgba(148, 163, 184, 0.16);
+      --font-head: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Halo Aurora : deux nappes fixes, sans coût de rendu au scroll. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -30% -10% auto -10%;
+      height: 90vh;
+      background:
+        radial-gradient(60% 55% at 30% 20%, rgba(16, 185, 129, 0.20), transparent 70%),
+        radial-gradient(50% 50% at 78% 12%, rgba(34, 211, 238, 0.14), transparent 72%);
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header { padding-bottom: clamp(40px, 10vh, 96px); }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .brand img { width: 30px; height: 30px; display: block; }
+    .brand .plus { color: var(--emerald-2); }
+
+    main { flex: 1; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 14px 7px 11px;
+      border: 1px solid rgba(52, 211, 153, 0.34);
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.09);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--emerald-2);
+      margin-bottom: 26px;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--emerald-2);
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+      animation: pulse 2.4s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+      70%  { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: clamp(38px, 8vw, 66px);
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      margin: 0 0 22px;
+    }
+    h1 .accent {
+      background: linear-gradient(100deg, var(--emerald-2), var(--cyan-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lede {
+      font-size: clamp(16px, 2.2vw, 18.5px);
+      line-height: 1.65;
+      color: var(--text-2);
+      max-width: 58ch;
+      margin: 0 0 14px;
+    }
+    .lede-2 {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0 0 38px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 18px;
+      margin-bottom: 52px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 26px;
+      border-radius: 13px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15.5px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+    }
+    .btn-primary {
+      background: var(--emerald);
+      color: #04140e;
+      box-shadow: 0 14px 34px -14px rgba(16, 185, 129, 0.75);
+    }
+    .btn-primary:hover { background: var(--emerald-2); transform: translateY(-2px); }
+    .btn-primary svg { width: 19px; height: 19px; fill: currentColor; }
+    .btn-ghost {
+      color: var(--text-2);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(148, 163, 184, 0.34); }
+
+    .proof {
+      border-top: 1px solid var(--line);
+      padding-top: 30px;
+    }
+    .proof-label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin: 0 0 20px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .stat-n {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: clamp(26px, 5vw, 34px);
+      letter-spacing: -0.03em;
+      color: var(--emerald-2);
+      line-height: 1.1;
+    }
+    .stat-l {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--line);
+      padding: 24px;
+    }
+    .foot-in {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+    .foot-in a { color: var(--muted); text-decoration: none; }
+    .foot-in a:hover { color: var(--text-2); text-decoration: underline; }
+    .disclaimer { max-width: 62ch; }
+
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; gap: 22px; }
+      .btn { width: 100%; justify-content: center; }
+      header { padding-bottom: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dot { animation: none; }
+      .btn { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ============ NAV (partagée) ============ -->
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a href="index.html" class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img"></a>
-      <nav class="nav-links">
-        <a href="index.html" class="active">Accueil</a>
-        <a href="salle-des-marches.html">Salle des marchés</a>
-        <a href="performances.html">Track record</a>
-        <a href="offres.html">Offres</a>
-        <a href="histoire.html">Notre Histoire</a>
-        <a href="contact.html">Nous contacter</a>
-        <a href="compte.html">Mon compte</a>
-      </nav>
-      <div class="nav-right">
-        <a href="offres.html" class="btn btn-primary nav-cta">Rejoindre les Early Birds</a>
-        <button class="nav-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
-      </div>
-    </div>
-  </header>
+  <div class="wrap">
+    <header>
+      <span class="brand">
+        <img src="LogoMarkETP.png" alt="" />
+        ExoTrading<span class="plus">Plus!</span>
+      </span>
+    </header>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="wrap">
-      <span class="badge-phase"><span class="dot"></span>PHASE 1 OUVERTE · EB VIP+ : prix verrouillé à vie</span>
-      <h1>L'exosquelette <span class="grad">IA</span> de l'investisseur qui performe</h1>
-      <p class="hero-sub">Une salle des marchés, une communauté d'investisseurs sérieux et des analyses claires produites par notre outil FINAI, dopé à l'IA et fondé sur la méthode CryptosSwing éprouvée depuis 2018.</p>
-      <div class="hero-cta-group">
-        <a href="offres.html" class="btn btn-primary btn-lg">Rejoindre les Early Birds</a>
-        <a href="salle-des-marches.html" class="btn btn-ghost btn-lg">Découvrir la salle des marchés</a>
+    <main>
+      <span class="badge"><span class="dot"></span>Ouverture imminente</span>
+
+      <h1>La salle des marchés<br />ouvre <span class="accent">très bientôt</span></h1>
+
+      <p class="lede">
+        Une communauté d'investisseurs sérieux, une salle des marchés suivie au quotidien
+        et des analyses claires produites par notre outil FINAI, dopé à l'IA et fondé sur
+        la méthode CryptosSwing éprouvée depuis 2018.
+      </p>
+      <p class="lede-2">
+        Les places de la première vague seront limitées. Le Discord est déjà ouvert :
+        c'est là que l'ouverture sera annoncée, et en premier.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://discord.com/invite/za25Zpjvtn" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.65 12.65 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.056c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Rejoindre le Discord
+        </a>
+        <a class="btn btn-ghost" href="mailto:team@optimizia.xyz?subject=ExoTradingPlus!%20-%20me%20prevenir%20de%20l%27ouverture">
+          Être prévenu par mail
+        </a>
       </div>
-      <!-- Track record (aperçu) — données RÉELLES, synthèse de ExoTradingPlus_TrackRecord_v4.1 -->
-      <div class="track-teaser reveal">
-        <div class="track-teaser-head">
-          <span class="eyebrow"><i data-lucide="line-chart"></i> Track record réel</span>
-          <span class="track-period"><i data-lucide="calendar-range"></i> Sur les 2 dernières années</span>
-        </div>
-        <div class="track-kpis">
-          <div class="tk"><div class="tk-num">83%</div><div class="tk-lbl">Trades gagnants</div></div>
-          <div class="tk featured"><div class="tk-num up">+15,4%</div><div class="tk-lbl">Gain moyen / trade gagnant</div></div>
-          <div class="tk"><div class="tk-num">259</div><div class="tk-lbl">Trades clôturés · 215 gagnants</div></div>
-        </div>
-        <div class="track-best-head">
-          <span class="tbh-title">Nos derniers trades <b>les plus performants</b></span>
-          <a href="performances.html" class="tbh-link">Voir tous les trades</a>
-        </div>
-        <div class="track-best-grid">
-          <div class="tb-card">
-            <div class="tb-top"><span class="tb-asset">ORE</span><span class="tb-tag">Long</span></div>
-            <div class="tb-lbl">Performance</div>
-            <div class="tb-pct">+104,9%</div>
-            <div class="tb-meta"><span class="tb-dur"><i data-lucide="clock"></i> en 39 jours</span><span class="tb-date">06/01/2026</span></div>
+
+      <section class="proof">
+        <p class="proof-label">Track record réel, sur les 2 dernières années</p>
+        <div class="stats">
+          <div>
+            <div class="stat-n">83%</div>
+            <div class="stat-l">Trades gagnants</div>
           </div>
-          <div class="tb-card">
-            <div class="tb-top"><span class="tb-asset">SOI</span><span class="tb-tag">Long</span></div>
-            <div class="tb-lbl">Performance</div>
-            <div class="tb-pct">+97,9%</div>
-            <div class="tb-meta"><span class="tb-dur"><i data-lucide="clock"></i> en 55 jours</span><span class="tb-date">05/05/2026</span></div>
+          <div>
+            <div class="stat-n">+15,4%</div>
+            <div class="stat-l">Gain moyen par trade gagnant</div>
           </div>
-          <div class="tb-card">
-            <div class="tb-top"><span class="tb-asset">VK</span><span class="tb-tag">Long</span></div>
-            <div class="tb-lbl">Performance</div>
-            <div class="tb-pct">+90,0%</div>
-            <div class="tb-meta"><span class="tb-dur"><i data-lucide="clock"></i> en 54 jours</span><span class="tb-date">15/03/2026</span></div>
+          <div>
+            <div class="stat-n">259</div>
+            <div class="stat-l">Trades clôturés, 215 gagnants</div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    </main>
+  </div>
 
-  <!-- ============ 3 PILIERS ============ -->
-  <section>
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow"><i data-lucide="route"></i> Comment ça marche</span>
-        <h2>Trois leviers pour investir avec méthode</h2>
-        <p>Soutenu par la communauté des investisseurs engagés Early Birds et nos outils, à la fin c'est vous qui décidez. Le tout calqué sur une stratégie qui marche depuis 8 ans, éprouvée et améliorée au fil du temps.</p>
-      </div>
-      <div class="parcours reveal">
-        <div class="parcours-track">
-          <div class="parcours-node start">
-            <i data-lucide="radar"></i>
-            <span class="label">Les marchés</span>
-          </div>
-
-          <div class="levier lift-up" tabindex="0">
-            <div class="levier-ico"><i data-lucide="cpu"></i></div>
-            <p><span class="levier-num">1/</span> <b>IA embarqué &amp; automatisations</b></p>
-            <span class="levier-sub">Des outils automatisés dopés à l'IA.</span>
-            <span class="levier-cue"><i data-lucide="plus"></i> Détails</span>
-            <div class="levier-more">
-              <b>L'outil FINAI</b> reproduit notre stratégie : 5&nbsp;filtres, analyse technique &amp; fondamentale, plan de trade complet. Il scanne les marchés et fait remonter les meilleures opportunités, automatiquement.
-            </div>
-          </div>
-
-          <div class="levier lift-down" tabindex="0">
-            <div class="levier-ico discord"><i data-lucide="radio-tower"></i></div>
-            <p><span class="levier-num">2/</span> <b>Discord, Communauté ExoTradingPlus!</b></p>
-            <span class="levier-sub">Vous n'êtes jamais seul pour investir.</span>
-            <span class="levier-cue"><i data-lucide="plus"></i> Détails</span>
-            <div class="levier-more">
-              Vous n'avancez pas seul : on échange sur les setups, on confronte les analyses, on progresse ensemble. Une communauté d'investisseurs sérieux qui avance groupée, plutôt que chacun dans son coin devant ses écrans.
-            </div>
-          </div>
-
-          <div class="levier lift-up" tabindex="0">
-            <div class="levier-ico"><i data-lucide="bar-chart-3"></i></div>
-            <p><span class="levier-num">3/</span> <b>Salle des marchés</b></p>
-            <span class="levier-sub">Les opportunités décryptées de bout en bout.</span>
-            <span class="levier-cue"><i data-lucide="plus"></i> Détails</span>
-            <div class="levier-more">
-              <b>Filtre humain</b> qui apporte un côté critique sur les opportunités FINAI. Les bons setups crypto et equity, <b>décryptés de bout en bout</b> : jamais un call balancé sans contexte. Chaque opportunité arrive avec son plan de trade et ses scénarios, pour que vous compreniez le pourquoi.
-            </div>
-          </div>
-
-          <div class="parcours-node end">
-            <i data-lucide="trending-up"></i>
-            <span class="label">Vous décidez</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ DISCORD HIGHLIGHT ============ -->
-  <section>
-    <div class="wrap">
-      <div class="discord-card reveal">
-        <div>
-          <span class="eyebrow"><i data-lucide="users"></i> Communauté ZiProject!</span>
-          <h2>Vous n'êtes plus jamais seul pour investir</h2>
-          <p>Le Discord ZiProject! est le cœur d'ExoTradingPlus! : salle de marché privée, forum d'analyse, partage de connaissance en live et suivi des opportunités FINAI chaque semaine. Les analyses FINAI y arrivent automatiquement, et vous échangez avec une communauté qui prend l'investissement au sérieux.</p>
-          <div class="discord-stats" style="margin-bottom:22px;">
-            <div><b>#ExoTradingPlus!</b><small>salon privé Early Birds</small></div>
-            <div><b>1h/sem</b><small>partage de connaissance<br><span class="nowrap">&amp; suivi des opportunités FINAI</span></small></div>
-            <div><b>24/7</b><small>forum &amp; salle de marché</small></div>
-          </div>
-          <a href="https://discord.com/invite/za25Zpjvtn" class="btn btn-discord">
-            <svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.011c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/></svg>
-            Rejoindre le Discord
-          </a>
-        </div>
-        <div class="discord-logo">
-          <svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.011c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/></svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TEASER SALLE DES MARCHÉS ============ -->
-  <section>
-    <div class="wrap">
-      <div class="split">
-        <div class="reveal">
-          <span class="eyebrow"><i data-lucide="radio-tower"></i> Salle des marchés</span>
-          <h2>De l'opportunité FINAI jusqu'à l'investissement, un parcours balisé</h2>
-          <p>Jamais un call balancé sans contexte. Chaque opportunité passe par le pipeline FINAI : 5 filtres, analyse technique et fondamentale, plan de trade et scénarios. Vous comprenez pourquoi, et vous décidez en pleine responsabilité.</p>
-          <ul class="flist" style="margin-bottom:24px;">
-            <li><i data-lucide="check"></i> Sélection des meilleures opportunités, crypto et equity</li>
-            <li><i data-lucide="check"></i> Analyses claires, argumentées, en HTML interactif</li>
-            <li><i data-lucide="check"></i> Sessions live, communauté et accompagnement</li>
-            <li><i data-lucide="check"></i> Accompagnement à l'apprentissage de la stratégie Swing Trading</li>
-          </ul>
-          <a href="salle-des-marches.html" class="btn btn-primary">Visiter la salle des marchés</a>
-        </div>
-        <div class="reveal">
-          <div class="video-frame">
-            <video controls playsinline preload="metadata" src="assets/parcoursUtilisateur.mp4"></video>
-          </div>
-          <p style="text-align:center;color:var(--muted);margin-top:14px;font-size:0.85rem;">Le parcours complet d'une opportunité, de la détection à la clôture, en 52 secondes.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 6 PILIERS ============ -->
-  <section>
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow"><i data-lucide="layers"></i> Ce que vous obtenez</span>
-        <h2>6 piliers. <span class="accent--or">1 souscription.</span></h2>
-      </div>
-      <div class="piliers reveal">
-        <div class="pilier">
-          <span class="pilier-tag"><span class="pilier-num">01</span> Curation</span>
-          <h3>Opportunités avant la foule</h3>
-          <p>Les pépites qui passent les 5 filtres FINAI, avant tout le monde.</p>
-        </div>
-        <div class="pilier feat">
-          <span class="pilier-tag"><span class="pilier-num">02</span> Analyses</span>
-          <h3>5 analyses FINAI / semaine</h3>
-          <p>Score, plan de trade, scénarios, verdict actionnable.</p>
-        </div>
-        <div class="pilier">
-          <span class="pilier-tag"><span class="pilier-num">03</span> Dashboard</span>
-          <h3>Dashboard FINAI 24/7</h3>
-          <p>Toutes vos analyses centralisées, mobile et desktop.</p>
-        </div>
-        <div class="pilier">
-          <span class="pilier-tag"><span class="pilier-num">04</span> Communauté</span>
-          <h3>Discord + apprentissage hebdo</h3>
-          <p>Salle privée, forum, partage de connaissance et suivi des opportunités FINAI en live chaque semaine.</p>
-        </div>
-        <div class="pilier">
-          <span class="pilier-tag"><span class="pilier-num">05</span> On demand</span>
-          <h3>Rapport complet &lt; 8 min</h3>
-          <p>Vos actifs analysés à la demande, réponse dans Discord.</p>
-        </div>
-        <div class="pilier">
-          <span class="pilier-tag"><span class="pilier-num">06</span> Prix</span>
-          <h3>Une seule souscription</h3>
-          <p>Toutes les briques futures incluses. Votre prix VIP+ ne bouge pas.</p>
-        </div>
-      </div>
-      <p class="piliers-more"><a href="salle-des-marches.html">Le détail complet dans la salle des marchés</a></p>
-    </div>
-  </section>
-
-  <!-- ============ EARLY BIRDS HIGHLIGHT ============ -->
-  <section>
-    <div class="wrap">
-      <div class="eb-highlight reveal">
-        <span class="eyebrow" style="justify-content:center;"><i data-lucide="infinity"></i> Offre fondatrice : VIP & VIP+</span>
-        <h2>Devenez co-bâtisseur d'ExoTradingPlus!</h2>
-        <p>Les Early Birds ne sont pas de simples abonnés. Ils rejoignent le projet en tant qu'ambassadeurs, au prix le plus bas qu'il aura jamais. EB VIP+ : verrouillé à vie.</p>
-        <div class="eb-points">
-          <div class="eb-point"><i data-lucide="lock"></i><div><strong>VIP+ : prix garanti à vie</strong><span>Engagement 12 mois : 30€/mois verrouillé à vie, même quand le public paiera jusqu'à 5x plus.</span></div></div>
-          <div class="eb-point"><i data-lucide="hammer"></i><div><strong>Rôle de co-bâtisseur</strong><span>Votre voix oriente les prochaines briques de l'outil. Vous construisez avec nous.</span></div></div>
-          <div class="eb-point"><i data-lucide="gift"></i><div><strong>Toutes les briques incluses</strong><span>Une seule souscription. Chaque nouvelle fonctionnalité livrée, automatiquement incluse.</span></div></div>
-        </div>
-        <a href="offres.html" class="btn btn-primary btn-lg">Voir les offres Early Birds</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER (partagé) ============ -->
-  <footer class="site">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div>
-          <div class="logo"><img src="newLogoCompletETP.png" alt="ExoTradingPlus!" class="logo-img logo-img-footer"></div>
-          <p style="max-width:320px;">L'exosquelette dopé à l'IA qui augmente l'investisseur dans sa performance. Adossé à la communauté ZiProject! et à la méthode CryptosSwing depuis 2018.</p>
-        </div>
-        <div>
-          <h4>Navigation</h4>
-          <a href="index.html">Accueil</a>
-          <a href="salle-des-marches.html">Salle des marchés</a>
-          <a href="performances.html">Track record</a>
-          <a href="offres.html">Offres Early Birds</a>
-          <a href="histoire.html">Notre Histoire</a>
-          <a href="contact.html">Nous contacter</a>
-        </div>
-        <div>
-          <h4>Communauté</h4>
-          <a href="https://discord.com/invite/za25Zpjvtn">Discord ZiProject!</a>
-          <a href="https://www.tiktok.com/@cryptosSwing">TikTok CryptosSwing</a>
-          <a href="https://www.youtube.com/@OptimizIA_xyz">YouTube (démarrage en cours)</a>
-        </div>
-        <div>
-          <h4>Contact &amp; Informations</h4>
-          <a href="mailto:contact@exotradingplus.com">contact@exotradingplus.com</a>
-          <a href="https://www.linkedin.com/in/remyginoux" target="_blank" rel="noopener">LinkedIn Rémy Ginoux</a>
-          <a href="https://www.linkedin.com/in/romainben" target="_blank" rel="noopener">LinkedIn Romain Ben</a>
-          <a href="mentions-legales.html">Mentions légales</a>
-          <a href="cgv.html">CGV</a>
-          <a href="politique-confidentialite.html">Confidentialité</a>
-        </div>
-      </div>
-      <div class="footer-optimizia">
-        <div class="fo-text">
-          <span class="fo-badge">Une réalisation OptimizIA.xyz</span>
-          <strong>ExoTradingPlus!, une réalisation by OptimizIA.xyz</strong>
-          <p>L'agence qui intègre l'IA et l'automatisation dans les TPE/PME pour libérer du temps productif : agents sur-mesure, workflows n8n, sites et outils métier.</p>
-        </div>
-        <a href="https://www.optimizia.xyz" class="fo-cta" target="_blank" rel="noopener">Découvrir OptimizIA.xyz</a>
-      </div>
-      <div class="footer-disclaimer">
-        <p><strong>Disclaimer :</strong> Le site exotradingplus.com s'adresse à une audience internationale. Les contenus, formations et services proposés sur ExoTradingPlus! ont une vocation strictement éducative et informative. Ils ne constituent en aucun cas des recommandations de réaliser des transactions et ne peuvent être considérés comme une incitation à acheter ou à vendre des instruments financiers. Le trading d'instruments financiers comporte un niveau de risque élevé et peut ne pas convenir à tout le monde. Informez-vous pleinement des risques liés aux marchés et n'investissez que des montants que vous pouvez vous permettre de perdre. ExoTradingPlus! ne garantit ni les résultats ni la performance des produits fondés sur les informations présentes sur son site et ses serveurs. En conséquence, ExoTradingPlus! et sa société éditrice déclinent toute responsabilité quant à l'usage qui pourrait être fait de ces informations et aux conséquences qui pourraient en découler. Pour un conseil adapté à votre situation, adressez-vous à un professionnel. Nous pourrons prochainement vous mettre en relation avec des conseillers en gestion de patrimoine présents dans notre communauté d'investisseurs.</p>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 ExoTradingPlus! · Développé par <a href="https://www.optimizia.xyz">OptimizIA.xyz</a> · Tous droits réservés</span>
-        <div class="footer-social">
-          <a href="https://discord.com/invite/za25Zpjvtn" aria-label="Discord"><svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.011c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418Z"/></svg></a>
-          <a href="https://www.youtube.com/@OptimizIA_xyz" aria-label="YouTube"><i data-lucide="youtube"></i></a>
-          <a href="https://www.tiktok.com/@cryptosSwing" aria-label="TikTok"><svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-        </div>
-      </div>
+  <footer>
+    <div class="foot-in">
+      <p class="disclaimer">
+        ExoTradingPlus! est un service de formation et d'accompagnement à l'apprentissage
+        de l'investissement. Les contenus diffusés ont une finalité exclusivement
+        pédagogique et ne constituent pas un conseil en investissement. Les performances
+        passées ne préjugent pas des performances futures.
+      </p>
+      <p class="disclaimer">
+        Publication assurée par Rémy Ginoux et Romain Ben.
+        Contact <a href="mailto:team@optimizia.xyz">team@optimizia.xyz</a>.
+        Hébergement LWS, hébergeur français.
+      </p>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-  <script src="assets/etp.js"></script>
-<script src="assets/oia-tracker.js" defer></script>
+<script>
+/* OptimizIA Tracker V3 (multi-sites) : mesure d'audience anonyme, sans tiers. Opt-out : ?notrack=1 */
+(function () {
+  'use strict';
+  var CFG = { site: 'etp', legal: 'politique-confidentialite.html', accent: '#10B981' };
+  var N8N = 'https://n8n.romainben.cloud/webhook/oia/sync';
+  var K = { optout: 'optimizia_notrack', consent: 'oia_consent', vid: 'oia_vid', sid: 'oia_sid', src: 'oia_src', cmp: 'oia_cmp' };
+  var isEN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  var TXT = isEN ? {
+    body: 'We measure our audience <strong>anonymously</strong>, with no third parties and no profiling. <a href="politique-confidentialite.html">Learn more</a>',
+    accept: 'Accept', refuse: 'Decline'
+  } : {
+    body: 'Nous mesurons notre audience de façon <strong>anonyme</strong>, sans partage tiers ni profilage. <a href="politique-confidentialite.html">En savoir plus</a>',
+    accept: 'Accepter', refuse: 'Refuser'
+  };
+
+  var Q = null;
+  try { Q = new URLSearchParams(location.search); } catch (e) {}
+
+  try {
+    if (Q && Q.has('notrack')) {
+      if (Q.get('notrack') === '1') { localStorage.setItem(K.optout, '1'); console.log('%c[OptimizIA] Tracker désactivé sur ce navigateur', 'color:#F97316;font-weight:bold'); }
+      else { localStorage.removeItem(K.optout); console.log('%c[OptimizIA] Tracker réactivé', 'color:#3B82F6;font-weight:bold'); }
+    }
+    if (localStorage.getItem(K.optout)) return;
+  } catch (e) {}
+
+  var REF_AT_LOAD = document.referrer || '';
+
+  function categorize(ref) {
+    var us = Q && (Q.get('utm_source') || '').toLowerCase().slice(0, 40);
+    if (us) return us;
+    if (!ref) return 'direct';
+    try {
+      var h = new URL(ref).hostname.toLowerCase();
+      if (h === location.hostname) return null;
+      var MAP = [
+        ['linkedin', 'linkedin'], ['lnkd.in', 'linkedin'],
+        ['tiktok', 'tiktok'], ['youtu', 'youtube'],
+        ['instagram', 'instagram'], ['facebook', 'facebook'], ['fb.com', 'facebook'],
+        ['twitter', 'x'], ['x.com', 'x'], ['t.co', 'x'],
+        ['discord', 'discord'], ['t.me', 'telegram'], ['telegram', 'telegram'],
+        ['reddit', 'reddit'], ['bing', 'bing'], ['duckduckgo', 'duckduckgo'],
+        ['seoplus.optimizia', 'seoplus'], ['optimizia.xyz', 'optimizia.xyz'],
+        ['romainben.cloud', 'romainben.cloud'], ['ginoux.xyz', 'ginoux.xyz'],
+        ['exotradingplus', 'exotradingplus'],
+      ];
+      for (var i = 0; i < MAP.length; i++) { if (h.indexOf(MAP[i][0]) !== -1) return MAP[i][1]; }
+      if (/^(www\.)?google\./.test(h)) return 'google';
+      return h.replace(/^www\./, '');
+    } catch (e) { return 'direct'; }
+  }
+
+  function uuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) { var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8); return v.toString(16); });
+  }
+
+  function startTracker() {
+    var vid, sid, src, cmp;
+    try {
+      vid = localStorage.getItem(K.vid);
+      if (!vid) { vid = uuid(); localStorage.setItem(K.vid, vid); }
+      sid = sessionStorage.getItem(K.sid);
+      if (!sid) { sid = uuid(); sessionStorage.setItem(K.sid, sid); }
+      src = sessionStorage.getItem(K.src);
+      if (!src) { src = categorize(REF_AT_LOAD) || 'direct'; sessionStorage.setItem(K.src, src); }
+      cmp = sessionStorage.getItem(K.cmp);
+      if (cmp === null || cmp === undefined) { cmp = ((Q && Q.get('utm_campaign')) || '').slice(0, 80); sessionStorage.setItem(K.cmp, cmp); }
+    } catch (e) { return; }
+
+    function payload(event, element) {
+      return { site: CFG.site, event: event, page: location.pathname, element: element || '', visitorId: vid, sessionId: sid, source: src, campaign: cmp, timestamp: new Date().toISOString() };
+    }
+    function send(event, element) {
+      fetch(N8N, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload(event, element)) }).catch(function () {});
+    }
+
+    send('pageview', document.title);
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest ? e.target.closest('a[href], button, [data-track]') : null;
+      if (!el) return;
+      var href = el.getAttribute('href') || '';
+      var text = (el.textContent || '').trim().slice(0, 80);
+      var external = false;
+      if (href && href.indexOf('#') !== 0) {
+        try { external = new URL(href, location.href).hostname !== location.hostname; } catch (err) {}
+      }
+      if (el.matches('button, [data-track], [class*="btn"], [class*="cta"]')) { send('cta_click', text); }
+      else if (external) { send('external_click', text || href.slice(0, 80)); }
+      else { send('nav_click', text); }
+    });
+
+    document.querySelectorAll('form').forEach(function (form) {
+      form.addEventListener('submit', function () { send('form_submit', form.id || form.getAttribute('action') || 'form'); });
+    });
+
+    var depths = [25, 50, 75, 100], fired = {};
+    window.addEventListener('scroll', function () {
+      var pct = Math.round((window.scrollY + window.innerHeight) / Math.max(document.body.scrollHeight, 1) * 100);
+      depths.forEach(function (d) { if (pct >= d && !fired[d]) { fired[d] = true; send('scroll_depth', d + '%'); } });
+    }, { passive: true });
+
+    var t0 = Date.now(), sentTime = false;
+    function sendTime() {
+      if (sentTime) return;
+      var s = Math.round((Date.now() - t0) / 1000);
+      if (s < 1) return;
+      sentTime = true;
+      try { navigator.sendBeacon(N8N, new Blob([JSON.stringify(payload('time_on_page', s + 's'))], { type: 'text/plain' })); } catch (e) {}
+    }
+    window.addEventListener('pagehide', sendTime);
+    window.addEventListener('beforeunload', sendTime);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') sendTime(); });
+  }
+
+  function ensureBanner() {
+    var el = document.getElementById('oia-consent');
+    if (el) return el;
+    el = document.createElement('div');
+    el.id = 'oia-consent';
+    el.className = 'oia-injected';
+    el.hidden = true;
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', isEN ? 'Audience measurement consent' : "Consentement mesure d'audience");
+    el.innerHTML = '<p class="oia-consent-text"></p><div class="oia-consent-actions"><button type="button" class="oia-btn-refuse"></button><button type="button" class="oia-btn-accept"></button></div>';
+    var st = document.createElement('style');
+    st.textContent = '#oia-consent.oia-injected{position:fixed;left:18px;bottom:18px;z-index:9999;max-width:340px;background:#0F172A;color:#E2E8F0;border:1px solid rgba(148,163,184,.28);border-radius:14px;padding:16px 18px;font-size:13px;line-height:1.55;box-shadow:0 12px 34px rgba(2,6,18,.45);font-family:inherit}#oia-consent.oia-injected[hidden]{display:none}#oia-consent.oia-injected a{color:inherit;text-decoration:underline}#oia-consent.oia-injected .oia-consent-actions{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}#oia-consent.oia-injected button{cursor:pointer;border-radius:8px;font-size:12.5px;padding:7px 14px;font-family:inherit}#oia-consent.oia-injected .oia-btn-accept{border:none;background:#10B981;color:#fff;font-weight:600}#oia-consent.oia-injected .oia-btn-refuse{border:1px solid rgba(148,163,184,.4);background:transparent;color:#94A3B8}';
+    document.head.appendChild(st);
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function showBanner() {
+    var el = ensureBanner();
+    if (!el) return;
+    el.querySelector('.oia-consent-text').innerHTML = TXT.body;
+    el.querySelector('.oia-btn-accept').textContent = TXT.accept;
+    el.querySelector('.oia-btn-refuse').textContent = TXT.refuse;
+    el.hidden = false;
+    el.setAttribute('data-show', '1');
+    el.querySelector('.oia-btn-accept').addEventListener('click', function () {
+      try { localStorage.setItem(K.consent, 'accepted'); } catch (e) {}
+      el.removeAttribute('data-show'); el.hidden = true;
+      startTracker();
+    });
+    el.querySelector('.oia-btn-refuse').addEventListener('click', function () {
+      try { localStorage.setItem(K.consent, 'refused'); } catch (e) {}
+      el.removeAttribute('data-show'); el.hidden = true;
+    });
+  }
+
+  var consent = null;
+  try { consent = localStorage.getItem(K.consent); } catch (e) {}
+  if (consent === 'accepted') startTracker();
+  else if (consent !== 'refused') {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showBanner);
+    else showBanner();
+  }
+})();
+</script>
 </body>
 </html>
