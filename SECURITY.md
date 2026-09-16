@@ -31,7 +31,7 @@ Le site est statique : aucun code côté serveur, aucun cookie posé par nginx. 
 ## Mesures en place
 
 * **CI sur chaque pull request et chaque push sur `main`** : l'image est construite, `nginx -t` est exécuté, puis un conteneur est lancé et vérifié (pages en 200, redirections, en-têtes de sécurité, compression). Rien ne se déploie sans ce feu vert.
-* **CodeQL** : analyse du JavaScript et des workflows GitHub Actions.
+* **CodeQL** : analyse des workflows GitHub Actions (le dépôt n'a pas de fichier JavaScript, le JavaScript inline de la page n'est pas analysé).
 * **Dependabot** : montées de version de l'image nginx et des GitHub Actions, fusionnées automatiquement (patch et mineures) une fois la CI passée, plus les mises à jour de sécurité.
 * **Dependency review** : bloque une pull request qui introduit une dépendance vulnérable.
 * **Secret scanning** avec protection au push.
